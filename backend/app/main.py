@@ -40,3 +40,8 @@ def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)
     db.commit()
     db.refresh(db_message)
     return db_message
+
+@app.get("/messages", response_model=list[schemas.Message])
+def get_messages(db: Session = Depends(get_db)):
+    messages = db.query(models.Message).all()
+    return messages

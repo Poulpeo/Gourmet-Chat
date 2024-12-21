@@ -3,10 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# URL de connexion à la base de données
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@db:5432/chatdb")
 
-# Création du moteur SQLAlchemy
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 # Création de la session

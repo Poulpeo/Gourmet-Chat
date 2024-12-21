@@ -6,26 +6,30 @@
 </head>
 <body>
     <div class="container">
-        <div class="registration">
-            <h2>Inscription</h2>
-            <input type="text" id="username" placeholder="Nom d'utilisateur">
-            <input type="text" id="foodPreferences" placeholder="Préférences culinaires">
-            <button onclick="registerUser()">S'inscrire</button>
+    <div class="registration">
+        <h2>Inscription</h2>
+        <input type="text" id="username" placeholder="Nom d'utilisateur">
+        <input type="text" id="foodPreferences" placeholder="Préférences culinaires">
+        <button onclick="registerUser()">S'inscrire</button>
+    </div>
+
+    <div id="currentUser"></div>
+
+    <div class="chat">
+        <div class="users-list">
+            <h3>Utilisateurs</h3>
+            <div id="usersList"></div>
         </div>
 
-        <div class="chat">
-            <div class="users-list">
-                <h3>Utilisateurs</h3>
-                <div id="usersList"></div>
-            </div>
-
-            <div class="messages">
-                <div id="messagesList"></div>
+        <div class="messages">
+            <div id="messagesList"></div>
+            <div class="message-input">
                 <input type="text" id="messageInput" placeholder="Votre message">
                 <button onclick="sendMessage()">Envoyer</button>
             </div>
         </div>
     </div>
+</div>
 
     <script src="/js/app.js"></script>
 </body>

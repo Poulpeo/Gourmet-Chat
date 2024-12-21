@@ -1,84 +1,90 @@
-# Gourmet Chat
+# Gourmet Chat 
 
-Une application de chat simple pour connecter les passionnés de gastronomie et faire de nouvelles rencontres.
+Une application de chat simple pour les passionnés de gastronomie, permettant de discuter et de faire des rencontres autour de la cuisine.
 
-## 🎯 Fonctionnalités
+##  Fonctionnalités
 
-- Chat en temps réel basique
-- Profils utilisateurs simples
-- Salons de discussion publics
-- Messages privés
-- Partage de photos
+- Inscription des utilisateurs avec leurs préférences culinaires
+- Liste des utilisateurs inscrits
+- Envoi et réception de messages
+- Interface simple et intuitive
 
-## 🛠 Stack Technique
+## Technologies Utilisées
 
-- **Backend**: Node.js + Express + Socket.io
-- **Frontend**: HTML + CSS + JavaScript vanilla
-- **Base de données**: SQLite
-- **Conteneurisation**: Docker
-
-## 🚀 Installation
-
-1. Cloner le projet :
-```bash
-git clone https://github.com/username/gourmet-chat
-cd gourmet-chat
-```
-
-2. Lancer avec Docker :
-```bash
-docker-compose up
-```
-
-L'application sera disponible sur `http://localhost:3000`
+- **Backend**: Python/FastAPI
+- **Frontend**: HTML/CSS/JavaScript
+- **Base de données**: PostgreSQL
+- **Conteneurisation**: Docker & Docker Compose
 
 ## 📁 Structure du Projet
 
 ```
 project/
 ├── backend/
-│   ├── src/
-│   │   ├── server.js      # Serveur Express + Socket.io
-│   │   ├── db.js          # Configuration SQLite
-│   │   └── routes.js      # Routes API
-│   ├── Dockerfile
-│   └── package.json
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── database.py    # Configuration de la base de données
+│   │   ├── main.py        # Points d'entrée API
+│   │   ├── models.py      # Modèles SQLAlchemy
+│   │   └── schemas.py     # Schémas Pydantic
+│   ├── requirements.txt   # Dépendances Python
+│   └── Dockerfile
 ├── frontend/
-│   ├── index.html
 │   ├── css/
 │   │   └── style.css
 │   ├── js/
-│   │   ├── chat.js        # Logique du chat
-│   │   └── app.js         # Application principale
+│   │   └── app.js
+│   ├── index.html
 │   └── Dockerfile
 └── docker-compose.yml
 ```
 
-## ⚙️ Configuration
+## Prérequis
 
-Fichier `config.js` à la racine :
+- Docker
+- Docker Compose
 
-```javascript
-module.exports = {
-  port: 3000,
-  dbPath: './database.sqlite',
-  secret: 'votre_secret'
-}
+## Installation et Démarrage
+
+1. Cloner le repository :
+```bash
+git clone <url-du-repo>
+cd gourmet-chat
 ```
 
-## 🔒 Sécurité de base
+2. Lancer l'application :
+```bash
+docker-compose up --build
+```
 
-- Authentification simple par session
-- Validation des entrées
-- Modération basique des contenus
+L'application sera disponible sur :
+- Frontend : http://localhost:80
+- API Backend : http://localhost:8000
+- Documentation API (Swagger) : http://localhost:8000/docs
 
-## 📝 Évolutions possibles
+## 🎯 Utilisation
 
-- [ ] Ajout d'emojis
-- [ ] Liste des utilisateurs en ligne
-- [ ] Historique des conversations
-- [ ] Système de likes
+1. **Inscription**
+   - Accédez à l'application via http://localhost
+   - Remplissez le formulaire d'inscription avec :
+     - Nom d'utilisateur
+     - Préférences culinaires
 
-## 📄 Licence
+2. **Envoi de messages**
+   - Une fois inscrit, utilisez la zone de chat pour envoyer des messages
+   - Les messages sont affichés dans l'ordre chronologique
+   - La liste des utilisateurs est visible sur le côté gauche
 
-MIT
+## 📡 API Endpoints
+
+- `POST /users` : Création d'un nouvel utilisateur
+- `GET /users` : Liste des utilisateurs
+- `POST /messages` : Envoi d'un message
+- `GET /messages` : Récupération des messages
+
+## 🔧 Variables d'Environnement
+
+Configuration dans `docker-compose.yml` :
+```yaml
+DATABASE_URL=postgresql://user:password@db:5432/chatdb
+```

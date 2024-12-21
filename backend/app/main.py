@@ -1,11 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from .database import engine
+from sqlalchemy.orm import Session
 from . import models, schemas
+from .database import engine, get_db
 
 app = FastAPI()
 
-# Configuration CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,17 +14,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Création des tables
+# Créer les tables
 models.Base.metadata.create_all(bind=engine)
 
-@app.post("/users")
-async def create_user(user: schemas.UserCreate):
-    return {"msg": "User created"}
+@app.post("/users", response_model=schemas.User)
+def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = models.User(
+        username=user.username,
+        food_preferences=user.food_preferences
+    )
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
 
-@app.get("/users")
-async def get_users():
-    return {"users": []}
+@app.get("/users", response_model=list[schemas.User])
+def get_users(db: Session = Depends(get_db)):
+    users = db.query(models.User).all()
+    return users
 
-@app.post("/messages")
-async def send_message(message: schemas.MessageCreate):
-    return {"msg": "Message sent"}
+@app.post("/messages", response_model=schemas.Message)
+def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)):
+    db_message = models.Message(**message.dict())
+    db.add(db_message)
+    db.commit()
+    db.refresh(db_message)
+    return db_message

@@ -1,0 +1,35 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.registration {
+    margin-bottom: 20px;
+}
+
+.chat {
+    display: flex;
+    gap: 20px;
+}
+
+.users-list {
+    width: 200px;
+}
+
+.messages {
+    flex-grow: 1;
+}
+
+#messagesList {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+input, button {
+    margin: 5px;
+    padding: 5px;
+}
